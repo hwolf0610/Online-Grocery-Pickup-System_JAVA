@@ -197,7 +197,7 @@ public class Paneorder extends javax.swing.JPanel {
         System.out.println(ordertime[3]);
         System.out.println(dtf.format(now));
 
-        order1 = data + plus + customID+"~"+order1 + "~" + ordertime[3];
+        order1 = data + plus + customID+"~"+order1 + "~" + ordertime[3]+":"+ordertime[4];
         String fileName = "src/test.txt";
 
         try {
