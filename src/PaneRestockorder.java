@@ -37,7 +37,7 @@ public class PaneRestockorder extends javax.swing.JPanel {
         try {
             data = new String(Files.readAllBytes(Paths.get(str)));
         } catch (IOException ex) {
-            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PaneFulfilOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         String[] totolly = data.split("/");
@@ -77,9 +77,9 @@ public class PaneRestockorder extends javax.swing.JPanel {
             outputStream.close();
             System.out.println("Wrote " + buffer.length + " bytes");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PaneFulfilOrder.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PaneFulfilOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        JFrame j = new JFrame("Restock order");
 //        j.getContentPane().add(scrollPane, BorderLayout.CENTER);

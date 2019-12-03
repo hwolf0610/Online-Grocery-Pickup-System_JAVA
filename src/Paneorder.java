@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.plaf.ComponentUI;
+import online.grade.order.onlineGroceryQueue;
+import online.grade.order.order;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,7 +32,8 @@ public class Paneorder extends javax.swing.JPanel {
     /**
      * Creates new form order
      */
- 
+    order ordervalue=new order();
+    onlineGroceryQueue basedQueue=new onlineGroceryQueue();
     
     public Paneorder() {
         initComponents(); 
@@ -172,45 +175,48 @@ public class Paneorder extends javax.swing.JPanel {
         String customerName = jTextField1.getText();
         String orderitem = jTextField5.getText();
         String quality = jTextField6.getText();
-        String order1 = "", plus = "";
-        order1 = customerName + "~" + orderitem + "~" + quality;
-        int customID = 1;
-        String data = "", str = "src/test.txt";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(str)));
-            if (data.isEmpty()) {
-                plus = "";customID = 0;
-            } else {
-                String[] totolly = data.split("/");
-                 customID = totolly.length;
-                plus = "/";
-            }
-            System.out.println(data);
-//            jTextField1.setText(data);
-        } catch (IOException ex) {
-            Logger.getLogger(Paneorder.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH/mm/ss");
-        LocalDateTime now = LocalDateTime.now();
-        String[] ordertime = dtf.format(now).toString().split("/");
-        System.out.println(ordertime[3]);
-        System.out.println(dtf.format(now));
-
-        order1 = data + plus + customID+"~"+order1 + "~" + ordertime[3]+":"+ordertime[4];
-        String fileName = "src/test.txt";
-
-        try {
-            byte[] buffer = order1.getBytes();
-            FileOutputStream outputStream = new FileOutputStream(fileName);
-            outputStream.write(buffer);
-            outputStream.close();
-            System.out.println("Wrote " + buffer.length + " bytes");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Paneorder.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Paneorder.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        basedQueue.saveorder(customerName,orderitem, quality);
+//        
+//        
+//        String order1 = "", plus = "";
+//        order1 = customerName + "~" + orderitem + "~" + quality;
+//        int customID = 1;
+//        String data = "", str = "src/test.txt";
+//        try {
+//            data = new String(Files.readAllBytes(Paths.get(str)));
+//            if (data.isEmpty()) {
+//                plus = "";customID = 0;
+//            } else {
+//                String[] totolly = data.split("/");
+//                 customID = totolly.length;
+//                plus = "/";
+//            }
+//            System.out.println(data);
+////            jTextField1.setText(data);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Paneorder.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH/mm/ss");
+//        LocalDateTime now = LocalDateTime.now();
+//        String[] ordertime = dtf.format(now).toString().split("/");
+//        System.out.println(ordertime[3]);
+//        System.out.println(dtf.format(now));
+//
+//        order1 = data + plus + customID+"~"+order1 + "~" + ordertime[3]+":"+ordertime[4];
+//        String fileName = "src/test.txt";
+//
+//        try {
+//            byte[] buffer = order1.getBytes();
+//            FileOutputStream outputStream = new FileOutputStream(fileName);
+//            outputStream.write(buffer);
+//            outputStream.close();
+//            System.out.println("Wrote " + buffer.length + " bytes");
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(Paneorder.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Paneorder.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         jDialog1.setVisible(true);
         jDialog1.setLocation(600, 300);
         jDialog1.setSize(260, 120);

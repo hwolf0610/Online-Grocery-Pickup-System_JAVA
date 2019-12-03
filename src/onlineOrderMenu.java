@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import online.grade.order.order;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,21 +16,23 @@ import javax.swing.JPanel;
  *
  * @author Admin
  */
-public class main extends javax.swing.JFrame {
+public class onlineOrderMenu extends javax.swing.JFrame {
 
     Boolean isRunning = false;
-
+     order ordervalue=new order();
     /**
      * Creates new form main
      */
-    public main() {
+    public onlineOrderMenu() {
         initComponents();
         this.setSize(750, 450);
         this.setLocation(550, 250);
-
         new changetime().start();
         isRunning = true;
-       
+        String formatorderlist = "src/orderlist.txt";
+        String formatstorelist = "src/store.txt";
+        ordervalue.fileoutput("", formatorderlist);
+        ordervalue.fileoutput("", formatstorelist);       
     }
 
     public void changePane(JPanel panelElegido) {
@@ -61,6 +64,7 @@ public class main extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
 
@@ -115,13 +119,21 @@ public class main extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
-        jMenuItem3.setText("Lookup & Fulfil the first order");
+        jMenuItem3.setText("Lookup the first order");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setText("Fulfil orders");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Restock orderd");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +170,7 @@ public class main extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        changePane(new Paneorderstore());
+        changePane(new PanelookupOrder());
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -170,6 +182,11 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
          changePane(new PanePrint());
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        changePane(new PaneFulfilOrder());
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,20 +205,21 @@ public class main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(onlineOrderMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(onlineOrderMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(onlineOrderMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(onlineOrderMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new main().setVisible(true);
+                new onlineOrderMenu().setVisible(true);
             }
         });
     }
@@ -216,7 +234,7 @@ public class main extends javax.swing.JFrame {
                     jLabel3.setText(dtf.format(now).toString());
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(onlineOrderMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -233,6 +251,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;

@@ -10,6 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import online.grade.order.order;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,45 +21,31 @@ import javax.swing.ListSelectionModel;
  *
  * @author Admin
  */
-public class Paneorderstore extends javax.swing.JPanel {
+public class PaneFulfilOrder extends javax.swing.JPanel {
 
     DefaultListModel listModel1 = new DefaultListModel();
     DefaultListModel listModel2 = new DefaultListModel();
     String str1 = "";
+    order ordervalue = new order();
 
     /**
-     * Creates new form Paneorderstore
+     * Creates new form PaneFulfilOrder
      */
-    public Paneorderstore() {
+    public PaneFulfilOrder() {
         initComponents();
-        String data = "", str = "src/test.txt";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(str)));
-        } catch (IOException ex) {
-            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        String data = "", filename = "src/orderlist.txt";
+        data = ordervalue.filereadin(filename);
         String[] totolly = data.split("/");
         for (int i = 0; i < totolly.length; i++) {
             String[] list = totolly[i].split("~");
-            String fact = list[0] + "~" + list[1] + "~" + list[2] + "~" + list[3]+ "~" + list[4];
+            String fact = list[0] + "~" + list[1] + "~" + list[2] + "~" + list[3] + "~" + list[4] + "~" + list[5];
             System.out.println(fact);
             listModel1.addElement(fact);
         }
         jList1.setModel(listModel1);
-//        jList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//        jList1.setSelectedIndex(0);
-//        jList1.addListSelectionListener(this);
-//        jList1.setVisibleRowCount(5);
-//        JScrollPane listScrollPane = new JScrollPane(jList1);
-
-String data1 = "", str1 = "src/store.txt";
-        try {
-            data1 = new String(Files.readAllBytes(Paths.get(str1)));
-        } catch (IOException ex) {
-            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        str1=data1;
+        String data1 = "", filename1 = "src/store.txt";
+        data1 = ordervalue.filereadin(filename1);
+        str1 = data1;
     }
 
     /**
@@ -145,24 +132,12 @@ String data1 = "", str1 = "src/store.txt";
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        System.out.println(jList1.getSelectedValue());
-        String[] str = jList1.getSelectedValue().toString().split("-");
+//        System.out.println(jList1.getSelectedValue());
+//        String[] str = jList1.getSelectedValue().toString().split("~");
         str1 = str1 + jList1.getSelectedValue().toString() + "/";
 
         String fileName = "src/store.txt";
-        byte[] buffer = str1.getBytes();
-        FileOutputStream outputStream;
-        try {
-            outputStream = new FileOutputStream(fileName);
-            outputStream.write(buffer);
-            outputStream.close();
-            System.out.println("Wrote " + buffer.length + " bytes");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        ordervalue.fileoutput(str1, fileName);
         listModel2.addElement(jList1.getSelectedValue().toString());
         jList3.setModel(listModel2);
         int index = jList1.getSelectedIndex();
@@ -180,53 +155,7 @@ String data1 = "", str1 = "src/store.txt";
 
     }//GEN-LAST:event_jList3ValueChanged
 
-// String data1 = "", str1 = "src/store.txt";
-//        try {
-//            data1 = new String(Files.readAllBytes(Paths.get(str1)));
-//        } catch (IOException ex) {
-//            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        String data2 = "", str2 = "src/test.txt";
-//        try {
-//            data2 = new String(Files.readAllBytes(Paths.get(str2)));
-//        } catch (IOException ex) {
-//            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        String[] save1 = data1.split("/");
-//        String[] save2 = data2.split("/");
-//        String[] save3 = new String[save2.length];
-//        for (int i = 0; i < save2.length; i++) {
-//            for (int j = 0; j < save1.length; j++) {
-//                if (!save2[i].isEmpty() && !save1[j].isEmpty()) {
-//                    if (save2[i] == save1[j]) {
-//                        continue;
-//                    } else {
-//                        save3[i]=save2[i];
-//                    }
-//                }
-//            }
-//        }
-//        String mid="";
-//        for(int i=0;i<save3.length;i++){
-//            mid=mid+save3[i]+"/";
-//        }
-//        String savestr = mid.substring(0, mid.length() - 1);
-//        System.out.println(savestr);
-//        String fileName = "src/test.txt";
-//        byte[] buffer = savestr.getBytes();
-//        FileOutputStream outputStream;
-//        try {
-//            outputStream = new FileOutputStream(fileName);
-//            outputStream.write(buffer);
-//            outputStream.close();
-//            System.out.println("Wrote " + buffer.length + " bytes");
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Paneorderstore.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JList<String> jList1;

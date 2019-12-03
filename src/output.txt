@@ -1,0 +1,1 @@
+Customer ID:3  ~  Customer Name:Ali  ~  order time:14:21  ~  pickup time:16:21  ~  Order items:Tomato,Carrot  ~  quantality:4kg,2kg   /  Customer ID:2  ~  Customer Name:Ali  ~  order time:14:21  ~  pickup time:16:21  ~  Order items:Tomato,Carrot  ~  quantality:4kg,2kg   /  

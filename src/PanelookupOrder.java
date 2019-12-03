@@ -19,33 +19,27 @@ import online.grade.order.order;
  *
  * @author Admin
  */
-public class PanePrint extends javax.swing.JPanel {
+public class PanelookupOrder extends javax.swing.JPanel {
 
     order ordervalue = new order();
 
     /**
-     * Creates new form PanePrint
+     * Creates new form PanelookupOrder
      */
-    public PanePrint() {
+    public PanelookupOrder() {
         initComponents();
-        String data = "", str = "src/store.txt";
-        try {
-            data = new String(Files.readAllBytes(Paths.get(str)));
-        } catch (IOException ex) {
-            Logger.getLogger(PaneFulfilOrder.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        String[] totolly = data.split("/");
-        String html = "", output = "";
+        String filename = "src/orderlist.txt";
+        String orderlist = ordervalue.filereadin(filename);
+
+        String[] totolly = orderlist.split("/");
+        String html = "";
         for (int i = 0; i < totolly.length; i++) {
             String[] list = totolly[i].split("~");
-            String fact = "<div>Customer ID:" + list[0] + "<br>Customer Name:" + list[1] + "<br>order time:" + list[2] + "<br>pickup time:" + list[3] + "<br>Order items:" + list[4] + "<br>quantality:" + list[5] + "</div><br>";
-            String out = "Customer ID:" + list[0] + "  ~  "+"Customer Name:" + list[1] + "  ~  "+"order time:" + list[2] + "  ~  "+"pickup time:" + list[3] + "  ~  "+"Order items:" + list[4] + "  ~  "+"quantality:" + list[5];
+            String fact = "<div>Customer ID:" + list[0] + "<br>Customer Name:" + list[1]  + "<br>order time:" + list[2] + "<br>pickup time:" + list[3]+ "<br>Order items:" + list[4] + "<br>quantality:" + list[5] + "</div><br>";
             html = html + fact;
-            output = output + out+"   /  ";
             System.out.println(fact);
         }
-
         jEditorPane1.setEditable(false);
         HTMLEditorKit kit = new HTMLEditorKit();
         jEditorPane1.setEditorKit(kit);
@@ -56,16 +50,13 @@ public class PanePrint extends javax.swing.JPanel {
         styleSheet.addRule("pre {font : 10px monaco; color : black; background-color : #fafafa; }");
         String htmlString = "<html>\n"
                 + "<body>\n"
-                + "<h1>All Print orders!</h1>\n"
+                + "<h1>The first order information:</h1>\n"
                 + html
                 + "</body>\n";
         Document doc = kit.createDefaultDocument();
         jEditorPane1.setDocument(doc);
         jEditorPane1.setText(htmlString);
 
-        JOptionPane.showMessageDialog(this, "Print Successfully!!!");
-        String filename = "src/output.txt";
-        ordervalue.fileoutput(output, filename);
     }
 
     /**
